@@ -10,6 +10,8 @@ public class CarControl : MonoBehaviour
     public float steeringRange = 30;
     public float steeringRangeAtMaxSpeed = 10;
     public float centreOfGravityOffset = -1f;
+    public bool car1;
+    public bool car2;
 
     WheelControl[] wheels;
     Rigidbody rigidBody;
@@ -29,8 +31,23 @@ public class CarControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float vInput = Input.GetAxis("Vertical");
-        float hInput = Input.GetAxis("Horizontal");
+        float vInput;
+        float hInput;
+        if (car1)
+        {
+            vInput = Input.GetAxis("Vertical");
+            hInput = Input.GetAxis("Horizontal");
+        }
+        else if (car2)
+        {
+            vInput = Input.GetAxis("Vertical2");
+            hInput = Input.GetAxis("Horizontal2");
+        }
+        else
+        {
+            vInput = Input.GetAxis("Vertical");
+            hInput = Input.GetAxis("Horizontal");
+        }
 
         //calculate current speed in relation to forward direction of car
         float forwardSpeed = Vector3.Dot(transform.forward, rigidBody.velocity);
